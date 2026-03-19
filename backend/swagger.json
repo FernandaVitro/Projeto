@@ -1,0 +1,134 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Siep-swagger",
+      "version": "1.0.0",
+      "description": "Documentação swagger"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/cadastroUsuario": {
+        "post": {
+          "summary": "Cadastro de usuário",
+          "tags": ["Usuário"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome_completo": { "type": "string" },
+                    "data_nasc": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "rg": { "type": "string" },
+                    "email": { "type": "string" },
+                    "telefone": { "type": "string" },
+                    "endereco": { "type": "string" },
+                    "cidade": { "type": "string" },
+                    "uf": { "type": "string" },
+                    "senha": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cadastro"
+            }
+          }
+        }
+      },
+  
+      "/loginUsuario": {
+        "post": {
+          "summary": "Login de usuário",
+          "tags": ["Usuário"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cpf": { "type": "string" },
+                    "senha": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "valido ou invalido"
+            }
+          }
+        }
+      },
+  
+      "/cadastroEmpresa": {
+        "post": {
+          "summary": "Cadastro de empresa",
+          "tags": ["Empresa"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome_empresa": { "type": "string" },
+                    "cnpj": { "type": "string" },
+                    "email": { "type": "string" },
+                    "telefone": { "type": "string" },
+                    "setor_atuacao": { "type": "string" },
+                    "endereco": { "type": "string" },
+                    "cidade": { "type": "string" },
+                    "uf": { "type": "string" },
+                    "descricao": { "type": "string" },
+                    "senha": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cadastro"
+            }
+          }
+        }
+      },
+  
+      "/loginEmpresa": {
+        "post": {
+          "summary": "Login de empresa",
+          "tags": ["Empresa"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": { "type": "string" },
+                    "senha": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "valido ou invalido"
+            }
+          }
+        }
+      }
+    }
+  }
