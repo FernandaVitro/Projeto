@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SIEP - Cadastro de Candidato</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastroCandidato.css">
+
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+
+<body>
+
+    <div class="div_container">
+
+        <div class="div_voltar">
+            <a href="#" id="voltar_inicio">← Voltar para início</a>
+        </div>
+
+        <div class="div_cabecalho">
+            <img src="img/logo.png" class="logo-quadrada">
+            <h1 class="titulo_principal">Cadastro Candidato</h1>
+            <p class="texto_secundario">Preencha seus dados para continuar</p>
+        </div>
+
+        <div class="div_etapas">
+            <div id="etapa1_indicador" class="etapa ativa">1</div>
+            <div id="linha_etapa" class="linha_etapa"></div>
+            <div id="etapa2_indicador" class="etapa">2</div>
+        </div>
+
+        <div id="etapa_1">
+            <div class="div_grupo">
+                <label class="label_padrao">Nome Completo</label>
+                <input id="nome_candidato" class="input_padrao" type="text" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Data de Nascimento</label>
+                <input id="data_nascimento" class="input_padrao" type="date">
+            </div>
+
+            <div class="div_dupla">
+                <div class="div_grupo">
+                    <label class="label_padrao">CPF</label>
+                    <input id="cpf" class="input_padrao" type="text" placeholder="000.000.000-00">
+                </div>
+                <div class="div_grupo">
+                    <label class="label_padrao">RG</label>
+                    <input id="rg" class="input_padrao" type="text" placeholder="00.000.000-0">
+                </div>
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Email</label>
+                <input id="email" class="input_padrao" type="email" placeholder="exemplo@email.com">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Telefone</label>
+                <input id="telefone" class="input_padrao" type="text" placeholder="(00) 00000-0000">
+            </div>
+
+            <button class="btn_principal" onclick="irParaEtapa2()">Próxima Etapa</button>
+
+            <p class="texto_login">
+                Já tem conta? <a href="#" id="login_candidato">Fazer login</a>
+            </p>
+        </div>
+
+        <div id="etapa_2" class="oculto">
+            <div class="div_grupo">
+                <label class="label_padrao">Endereço</label>
+                <input id="endereco" class="input_padrao" type="text" placeholder="Rua, número, bairro">
+            </div>
+
+            <div class="div_dupla">
+                <div class="div_grupo" style="flex: 3;">
+                    <label class="label_padrao">Cidade</label>
+                    <input id="cidade" class="input_padrao" type="text">
+                </div>
+                <div class="div_grupo" style="flex: 1;">
+                    <label class="label_padrao">UF</label>
+                    <select id="uf" class="select_padrao">
+                        <option value="">UF</option>
+                        <option value="SP">SP</option>
+                        <option value="RJ">RJ</option>
+                        <option value="MG">MG</option>
+                        <option value="ES">ES</option>
+                        <option value="PR">PR</option>
+                        <option value="SC">SC</option>
+                        <option value="RS">RS</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Senha</label>
+                <input id="senha" class="input_padrao" type="password" placeholder="Mínimo 6 caracteres">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Confirmar Senha</label>
+                <input id="confirmar_senha" class="input_padrao" type="password" placeholder="Repita sua senha">
+            </div>
+
+            <div class="div_botoes">
+                <button class="btn_secundario" onclick="voltarEtapa1()">Voltar</button>
+                <button id="btn_cadastrar" class="btn_principal">Finalizar Cadastro</button>
+            </div>
+
+            <p id="resultado" style="text-align: center; margin-top: 15px; font-size: 14px; color: #d9534f; font-weight: 500;"></p>
+        </div>
+
+        <div id="popup_sucesso" class="popup oculto">
+            <div class="popup_box">
+                <div class="popup_icon">✓</div>
+                <h2>Sucesso!</h2>
+                <p>Seu cadastro foi realizado com sucesso.</p>
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navegação simples entre páginas
+        document.getElementById("voltar_inicio").onclick = (e) => {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        };
+        
+        document.getElementById("login_candidato").onclick = (e) => {
+            e.preventDefault();
+            window.location.href = 'loginCandidato.html';
+        };
+
+        // Funções de transição de etapa
+        function irParaEtapa2() {
+            // Validação básica da etapa 1 antes de passar
+            const nome = document.getElementById("nome_candidato").value;
+            const email = document.getElementById("email").value;
+            
+            if(nome.length < 3 || !email.includes("@")) {
+                alert("Por favor, preencha os dados básicos corretamente antes de prosseguir.");
+                return;
+            }
+
+            document.getElementById('etapa_1').classList.add('oculto');
+            document.getElementById('etapa_2').classList.remove('oculto');
+            document.getElementById('etapa2_indicador').classList.add('ativa');
+            document.getElementById('linha_etapa').classList.add('ativa');
+        }
+
+        function voltarEtapa1() {
+            document.getElementById('etapa_2').classList.add('oculto');
+            document.getElementById('etapa_1').classList.remove('oculto');
+            document.getElementById('etapa2_indicador').classList.remove('ativa');
+            document.getElementById('linha_etapa').classList.remove('ativa');
+        }
+
+        // Lógica de envio para o Back-end
+        document.getElementById("btn_cadastrar").addEventListener("click", async () => {
+            const senhaRaw = document.getElementById("senha").value;
+            const confirmar = document.getElementById("confirmar_senha").value;
+            const msgResultado = document.getElementById("resultado");
+
+            // Limpa mensagens anteriores
+            msgResultado.innerText = "";
+
+            // Validações no Front-end
+            if (senhaRaw.length < 6) {
+                msgResultado.innerText = "A senha deve ter pelo menos 6 caracteres.";
+                return;
+            }
+
+            if (senhaRaw !== confirmar) {
+                msgResultado.innerText = "As senhas não coincidem!";
+                return;
+            }
+
+            // Organiza os dados para bater com o req.body do seu Back-end
+            const dados = {
+                nome_completo: document.getElementById("nome_candidato").value,
+                data_nasc: document.getElementById("data_nascimento").value,
+                cpf: document.getElementById("cpf").value.replace(/\D/g, ""), // Remove pontos e traços
+                rg: document.getElementById("rg").value.replace(/\D/g, ""),
+                email: document.getElementById("email").value,
+                telefone: document.getElementById("telefone").value,
+                endereco: document.getElementById("endereco").value,
+                cidade: document.getElementById("cidade").value,
+                uf: document.getElementById("uf").value,
+                senha: senhaRaw
+            };
+
+            try {
+                // Envia para a rota correta do seu servidor
+                const resposta = await fetch("http://localhost:3000/cadastroUsuario", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dados)
+                });
+
+                const retorno = await resposta.json();
+
+                if (retorno.resposta === "Cadastro efetuado com sucesso!") {
+                    document.getElementById("popup_sucesso").classList.remove("oculto");
+                    // Aguarda o tempo do spinner antes de redirecionar
+                    setTimeout(() => {
+                        window.location.href = "loginCandidato.html";
+                    }, 2500);
+                } else {
+                    // Aqui o sistema exibe "CPF já cadastrado", "E-mail já cadastrado", etc.
+                    msgResultado.innerText = retorno.resposta || "Erro ao processar cadastro.";
+                }
+            } catch (erro) {
+                msgResultado.innerText = "Servidor indisponível. Tente novamente mais tarde.";
+                console.error("Erro na requisição:", erro);
+            }
+        });
+    </script>
+</body>
+
+</html>

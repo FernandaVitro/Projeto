@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEP</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="loginEmpresa.css">
+
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="#" class="back-link" id="btn_voltar_inicio">
+            <i class="fa-solid fa-arrow-left"></i> Voltar para início
+        </a>
+
+        <div class="card">
+
+            <img src="img/logo.png" class="logo-quadrada">
+
+            <h1>Área da Empresa</h1>
+            <p class="subtitle">Acesse o painel de gestão</p>
+
+            <form id="form_login_empresa">
+
+                <div class="input-group">
+                    <label>Email Corporativo</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="input_email_empresa" placeholder="empresa@email.com">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Senha</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="input_senha_empresa" placeholder="Digite sua senha">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn_entrar_empresa">Entrar</button>
+
+            </form>
+
+            <p id="msg_resultado"></p>
+
+            <p class="footer-text">
+                Não tem uma conta? <a href="#" id="btn_ir_cadastro_empresa">Cadastre sua empresa</a>
+            </p>
+
+        </div>
+
+    </div>
+    <script>
+
+        // VOLTAR
+        document.getElementById("btn_voltar_inicio").onclick = () => {
+            window.location.href = 'index.html';
+        };
+
+        // IR PARA CADASTRO
+        document.getElementById("btn_ir_cadastro_empresa").onclick = () => {
+            window.location.href = 'cadastroEmpresa.html';
+        };
+
+        // LOGIN EMPRESA
+        document.getElementById("form_login_empresa").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("input_email_empresa").value;
+            const senha = document.getElementById("input_senha_empresa").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/loginEmpresa", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const data = await resposta.json();
+
+                if (data.ok) {
+
+                    localStorage.setItem("token", data.token)
+                    localStorage.setItem("id_empresa", data.id_empresa)
+
+                    window.location.href = "painelEmpresa.html"
+                } else {
+                    document.getElementById("msg_resultado").innerText = "Email ou senha inválidos";
+                }
+
+            } catch (erro) {
+                console.error(erro);
+                document.getElementById("msg_resultado").innerText = "Erro no servidor";
+            }
+
+
+        });
+
+    </script>
+</body>
+
+</html>

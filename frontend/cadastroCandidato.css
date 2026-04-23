@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* FUNDO DA TELA */
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f6f9ff, #eef3ff);
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centralizado para o cadastro ficar confortável */
+    padding: 20px;
+}
+
+.div_container {
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    padding: 40px 32px;
+    border-radius: 22px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* VOLTAR PARA INÍCIO */
+.div_voltar a {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.div_voltar a:hover {
+    color: #3b5bdb;
+}
+
+/* CABEÇALHO */
+.div_cabecalho {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.div_icone {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: #3b5bdb;
+    color: #fff;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.titulo_principal {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.texto_secundario {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ETAPAS (INDICADORES) */
+.div_etapas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.etapa {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #eef2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #3b5bdb;
+}
+
+.etapa.ativa {
+    background: #3b5bdb;
+    color: #fff;
+}
+
+.linha_etapa {
+    width: 40px;
+    height: 4px;
+    background: #eef2ff;
+    border-radius: 2px;
+}
+
+.linha_etapa.ativa {
+    background: #3b5bdb;
+}
+
+/* GRUPOS DE INPUT */
+.div_grupo {
+    margin-bottom: 18px;
+}
+
+.label_padrao {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.input_padrao,
+.select_padrao,
+.textarea_padrao {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #dbe3ff;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.input_padrao:focus,
+.select_padrao:focus {
+    border: 2px solid #3b5bdb;
+}
+
+.div_dupla {
+    display: flex;
+    gap: 12px;
+}
+
+/* BOTÕES */
+.btn_principal {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #3b5bdb, #4c6ef5);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn_principal:hover {
+    opacity: 0.9;
+}
+
+.btn_secundario {
+    width: 100%;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid #dbe3ff;
+    border-radius: 14px;
+    color: #6b7280;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.div_botoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* LINKS DE LOGIN */
+.texto_login {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6b7280;
+    text-align: center;
+}
+
+.texto_login a {
+    color: #3b5bdb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* POPUP E SPINNER (AZUL TEMA) */
+.popup {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+
+.popup_box {
+    background: #fff;
+    padding: 32px;
+    border-radius: 22px;
+    text-align: center;
+    width: 320px;
+}
+
+.popup_icon {
+    width: 64px; height: 64px;
+    background: #eef2ff;
+    color: #3b5bdb;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+}
+
+.spinner {
+    width: 28px; height: 28px;
+    border: 3px solid #eef2ff;
+    border-top: 3px solid #3b5bdb;
+    border-radius: 50%;
+    margin: 16px auto 0;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.logo-quadrada {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* mantém proporção */
+    border-radius: 10px; /* deixa levemente arredondado */
+}
+
+.oculto {
+    display: none;
+}

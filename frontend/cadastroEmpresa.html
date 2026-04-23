@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SIEP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastroEmpresa.css">
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+
+<body>
+
+    <div class="div_container">
+
+
+        <div class="div_voltar">
+            <a href="#" id="voltar_inicio">← Voltar para início</a>
+        </div>
+
+        <div class="div_cabecalho">
+            <img src="img/logo.png" class="logo-quadrada">
+            <h1 class="titulo_principal">Cadastrar Empresa</h1>
+            <p class="texto_secundario">Publique vagas e encontre talentos</p>
+        </div>
+
+        <div class="div_etapas">
+            <div id="etapa1_indicador" class="etapa ativa">1</div>
+            <div id="linha_etapa" class="linha_etapa"></div>
+            <div id="etapa2_indicador" class="etapa">2</div>
+        </div>
+
+        <!-- ETAPA 1 -->
+        <div id="etapa_1">
+            <div class="div_grupo">
+                <label class="label_padrao">Nome da Empresa</label>
+                <input id="nome_empresa" class="input_padrao" type="text">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">CNPJ</label>
+                <input id="cnpj" class="input_padrao" type="text">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Email Corporativo</label>
+                <input id="email" class="input_padrao" type="email">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Telefone</label>
+                <input id="telefone" class="input_padrao" type="text">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Setor de Atuação</label>
+                <select id="setor_atuacao" class="select_padrao">
+                    <option>Selecione o setor</option>
+                    <option>Tecnologia</option>
+                    <option>Saúde</option>
+                    <option>Educação</option>
+                </select>
+            </div>
+
+            <button class="btn_principal" onclick="irParaEtapa2()">Continuar</button>
+
+            <p class="texto_login">
+                Já tem uma conta? <a href="#" id="login_empresa">Fazer login</a>
+            </p>
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div id="etapa_2" class="oculto">
+            <div class="div_grupo">
+                <label class="label_padrao">Endereço</label>
+                <input id="endereco" class="input_padrao" type="text">
+            </div>
+
+            <div class="div_dupla">
+                <div class="div_grupo">
+                    <label class="label_padrao">Cidade</label>
+                    <input id="cidade" class="input_padrao" type="text">
+                </div>
+
+                <div class="div_grupo">
+                    <label class="label_padrao">UF</label>
+                    <select id="uf" class="select_padrao">
+                        <option>UF</option>
+                        <option>SP</option>
+                        <option>RJ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Descrição da Empresa</label>
+                <textarea id="descricao" class="textarea_padrao"></textarea>
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Senha</label>
+                <input id="senha" class="input_padrao" type="password">
+            </div>
+
+            <div class="div_grupo">
+                <label class="label_padrao">Confirmar Senha</label>
+                <input id="confirmar_senha" class="input_padrao" type="password">
+            </div>
+
+            <div class="div_botoes">
+                <button class="btn_secundario" onclick="voltarEtapa1()">Voltar</button>
+                <button id="btn_cadastrar" class="btn_principal">Cadastrar</button>
+            </div>
+
+            <p id="resultado"></p>
+
+            <p class="texto_login">
+                Já tem uma conta? <a href="#" id="login_empresa2">Fazer login</a>
+            </p>
+        </div>
+
+
+    </div>
+
+</body>
+
+<script>
+
+    document.getElementById("voltar_inicio").onclick = () => {
+        window.location.href = 'index.html';
+    };
+
+    document.getElementById("login_empresa").onclick = () => {
+        window.location.href = 'loginEmpresa.html';
+    };
+
+    document.getElementById("login_empresa2").onclick = () => {
+        window.location.href = 'loginEmpresa.html';
+    };
+
+    function irParaEtapa2() {
+        document.getElementById('etapa_1').classList.add('oculto');
+        document.getElementById('etapa_2').classList.remove('oculto');
+
+        document.getElementById('etapa2_indicador').classList.add('ativa');
+        document.getElementById('linha_etapa').classList.add('ativa');
+    }
+
+    function voltarEtapa1() {
+        document.getElementById('etapa_2').classList.add('oculto');
+        document.getElementById('etapa_1').classList.remove('oculto');
+
+        document.getElementById('etapa2_indicador').classList.remove('ativa');
+        document.getElementById('linha_etapa').classList.remove('ativa');
+    }
+
+    // BANCO DE DADOS
+    document.getElementById("btn_cadastrar").addEventListener("click", async () => {
+
+        const senha = document.getElementById("senha").value;
+        const confirmar = document.getElementById("confirmar_senha").value;
+
+        if (senha !== confirmar) {
+            document.getElementById("resultado").innerText = "As senhas não coincidem";
+            return;
+        }
+
+        const dados = {
+            nome_empresa: document.getElementById("nome_empresa").value,
+            cnpj: document.getElementById("cnpj").value.replace(/\D/g, ""),
+            email: document.getElementById("email").value,
+            telefone: document.getElementById("telefone").value,
+            setor_atuacao: document.getElementById("setor_atuacao").value,
+            endereco: document.getElementById("endereco").value,
+            cidade: document.getElementById("cidade").value,
+            uf: document.getElementById("uf").value,
+            descicao: document.getElementById("descricao").value,
+            senha: senha
+        };
+
+        try {
+            const resposta = await fetch("http://localhost:3000/cadastroEmpresa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const retorno = await resposta.json();
+            document.getElementById("resultado").innerText = retorno.resposta;
+
+            if (retorno.resposta.includes("sucesso")) {
+                setTimeout(() => {
+                    window.location.href = "loginEmpresa.html";
+                }, 1500);
+            }
+
+        } catch (erro) {
+            document.getElementById("resultado").innerText = "Erro ao conectar com o servidor";
+            console.error(erro);
+        }
+    });
+
+</script>
+
+</html>

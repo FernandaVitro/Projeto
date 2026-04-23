@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEP</title>
+    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+</head>
+
+<body>
+
+    <nav class="div_menu_lateral">
+        <img src="img/logo.png" class="logo-quadrada">
+
+        <a href="#" class="btn_item_navegacao"><i class="fas fa-home"></i> Início</a>
+        <a href="#" class="btn_item_navegacao"><i class="fas fa-search"></i> Vagas</a>
+        <a href="#" class="btn_item_navegacao"><i class="fas fa-file-alt"></i> Minhas Candidaturas</a>
+        <a href="#" class="btn_item_navegacao"><i class="fas fa-calendar-alt"></i> Entrevistas</a>
+        <a href="#" class="btn_item_navegacao ativo"><i class="fas fa-user"></i> Meu Perfil</a>
+        <a href="#" class="btn_item_navegacao"><i class="fas fa-bell"></i> Notificações</a>
+
+        <div class="div_espacador_sair">
+            <a href="#" class="btn_item_navegacao" id="voltar_inicio">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </a>
+        </div>
+    </nav>
+
+    <main class="div_conteudo_principal">
+
+        <header class="div_cabecalho_perfil">
+            <div>
+                <h1 class="txt_titulo_pagina">Meu Perfil</h1>
+                <p class="txt_subtitulo_pagina">Mantenha seu perfil atualizado</p>
+            </div>
+
+            <!-- BOTÕES CORRETOS -->
+            <div>
+                <button class="btn_editar_perfil" id="btnEditar">
+                    <i class="fas fa-pencil"></i> Editar Perfil
+                </button>
+
+                <button class="btn_editar_perfil" id="btnSalvar" style="display:none; background:#2563eb; color:white;">
+                    Salvar
+                </button>
+
+                <button class="btn_editar_perfil" id="btnCancelar" style="display:none; background:#e5e7eb;">
+                    Cancelar
+                </button>
+            </div>
+        </header>
+
+        <section class="div_cartao div_perfil_topo">
+
+            <!-- FOTO -->
+            <div class="div_foto_substituta" id="fotoPreview"
+                style="width:80px;height:80px;border-radius:15px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;cursor:pointer;">
+                P
+            </div>
+
+            <input type="file" id="fotoInput" style="display:none;" accept="image/*">
+
+            <div>
+                <h2 class="txt_nome_usuario editavel" id="nomeTexto">Nome</h2>
+
+                <p class="txt_subtitulo_pagina editavel" id="sobreTexto">
+                    Adicione uma descrição sobre você
+                </p>
+
+                <small class="txt_email_usuario" id="emailTexto"></small>
+            </div>
+        </section>
+
+        <div class="div_grade_informacoes">
+
+            <section class="div_cartao">
+                <div class="div_titulo_secao">
+                    <i class="fas fa-user-circle"></i> Dados Pessoais
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Data de Nascimento</span>
+                    <span id="dataTexto">-</span>
+                    <input type="date" id="dataInput" style="display:none;">
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Telefone</span>
+                    <span id="telTexto">-</span>
+                    <input type="text" id="telInput" style="display:none;">
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Localização</span>
+                    <span id="cidadeTexto">-</span>
+                    <input type="text" id="cidadeInput" style="display:none;">
+                </div>
+            </section>
+
+            <section class="div_cartao">
+                <div class="div_titulo_secao">
+                    <i class="fas fa-graduation-cap"></i> Formação
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Escolaridade</span>
+                    <span id="escTexto">-</span>
+                    <input type="text" id="escInput" style="display:none;">
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Instituição</span>
+                    <span id="instTexto">-</span>
+                    <input type="text" id="instInput" style="display:none;">
+                </div>
+
+                <div class="div_linha_informacao">
+                    <span>Curso</span>
+                    <span id="cursoTexto">-</span>
+                    <input type="text" id="cursoInput" style="display:none;">
+                </div>
+            </section>
+        </div>
+
+        <!-- HABILIDADES -->
+        <section class="div_cartao">
+            <div class="div_titulo_secao">
+                <i class="fas fa-briefcase"></i> Habilidades
+            </div>
+
+            <div id="listaHabilidades" style="margin-top:10px;">Nenhuma habilidade adicionada</div>
+
+            <input type="text" id="habInput" placeholder="Adicionar habilidade"
+                style="display:none; width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:10px;">
+        </section>
+
+        <!-- CURRÍCULO -->
+        <section class="div_cartao">
+            <h3 class="txt_nome_usuario">Currículo</h3>
+
+            <div class="div_caixa_envio" id="curriculoBox"
+                style="cursor:pointer; border:2px dashed #ccc; padding:20px; text-align:center; border-radius:10px;">
+                <i class="fas fa-upload icone_envio"></i>
+                <p class="txt_ajuda_envio" id="curriculoTexto">Nenhum currículo enviado</p>
+                <small>PDF, DOC ou DOCX</small>
+            </div>
+
+            <input type="file" id="curriculoInput" style="display:none;" accept=".pdf,.doc,.docx">
+        </section>
+
+    </main>
+
+</body>
+
+<script>
+
+    const id = localStorage.getItem("id_usuario")
+    const token = localStorage.getItem("token")
+
+    // 🔐 PROTEÇÃO
+    if (!id || !token) {
+        window.location.href = "login.html"
+    }
+
+    let habilidades = []
+    let modoEdicao = false
+    let nomeArquivoCurriculo = null
+
+    function atualizarCursor() {
+        fotoPreview.style.cursor = modoEdicao ? "pointer" : "default"
+        curriculoBox.style.cursor = modoEdicao ? "pointer" : "pointer"
+    }
+
+    // EDITAR 
+    btnEditar.onclick = () => {
+
+        modoEdicao = true
+        atualizarCursor()
+
+        document.body.classList.add("editando")
+
+        btnEditar.style.display = "none"
+        btnSalvar.style.display = "inline"
+        btnCancelar.style.display = "inline"
+
+        document.querySelectorAll(".editavel").forEach(el => {
+            el.contentEditable = true
+        })
+
+        toggleCampo("data")
+        toggleCampo("tel")
+        toggleCampo("cidade")
+        toggleCampo("esc")
+        toggleCampo("inst")
+        toggleCampo("curso")
+
+        habInput.style.display = "block"
+    }
+
+    // CANCELAR
+    btnCancelar.onclick = () => location.reload()
+
+    // SALVAR
+    btnSalvar.onclick = async () => {
+
+        const formData = new FormData()
+
+        formData.append("nome_completo", nomeTexto.innerText.trim())
+        formData.append("sobre_voce", sobreTexto.innerText.trim())
+
+        formData.append("data_nasc", dataInput.value)
+        formData.append("telefone", telInput.value)
+        formData.append("cidade", cidadeInput.value)
+
+        formData.append("escolaridade", escInput.value)
+        formData.append("instituicao", instInput.value)
+        formData.append("curso", cursoInput.value)
+
+        formData.append("habilidades", JSON.stringify(habilidades))
+
+        if (fotoInput.files[0]) {
+            formData.append("foto", fotoInput.files[0])
+        }
+
+        if (curriculoInput.files[0]) {
+            formData.append("curriculo", curriculoInput.files[0])
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/perfil/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            })
+
+            const data = await res.json()
+
+            if (data.ok) {
+                alert("Perfil atualizado!")
+                location.reload()
+            } else {
+                alert("Erro ao salvar")
+            }
+
+        } catch (err) {
+            console.log(err)
+            alert("Erro no servidor")
+        }
+    }
+
+    // FOTO
+    fotoPreview.onclick = () => {
+        if (!modoEdicao) return
+        fotoInput.click()
+    }
+
+    fotoInput.onchange = e => {
+        const file = e.target.files[0]
+        if (!file) return
+
+        const reader = new FileReader()
+
+        reader.onload = ev => {
+            fotoPreview.style.backgroundImage = `url(${ev.target.result})`
+            fotoPreview.innerHTML = ""
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    // CURRICULO
+    curriculoBox.onclick = () => {
+
+        if (modoEdicao) {
+            curriculoInput.click()
+            return
+        }
+
+        if (nomeArquivoCurriculo) {
+            window.open(`http://localhost:3000/uploads/${nomeArquivoCurriculo}`, "_blank")
+        } else {
+            alert("Nenhum currículo enviado")
+        }
+    }
+
+    curriculoInput.onchange = e => {
+        if (e.target.files[0]) {
+            curriculoTexto.innerHTML = `<strong>${e.target.files[0].name}</strong>`
+        }
+    }
+
+    // HABILIDADES
+    function renderHabilidades() {
+        const div = document.getElementById("listaHabilidades")
+        div.innerHTML = ""
+
+        if (habilidades.length === 0) {
+            div.innerHTML = "Nenhuma habilidade adicionada"
+            return
+        }
+
+        habilidades.forEach((h, i) => {
+            const tag = document.createElement("span")
+
+            tag.innerText = h + " ✕"
+
+            tag.onclick = () => {
+                habilidades.splice(i, 1)
+                renderHabilidades()
+            }
+
+            div.appendChild(tag)
+        })
+    }
+
+    habInput.addEventListener("keypress", e => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+
+            if (e.target.value.trim()) {
+                habilidades.push(e.target.value)
+                e.target.value = ""
+                renderHabilidades()
+            }
+        }
+    })
+
+    // SAIR
+    document.getElementById("voltar_inicio").onclick = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("id_usuario")
+        localStorage.removeItem("id_empresa")
+
+        window.location.href = "index.html"
+    }
+
+    // 🔥 CARREGAR DADOS COM TOKEN
+    window.onload = async () => {
+
+        atualizarCursor()
+
+        try {
+            const res = await fetch(`http://localhost:3000/perfil/${id}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+
+            const user = await res.json()
+
+            if (!user) return
+
+            nomeTexto.innerText = user.nome_completo
+            sobreTexto.innerText = user.sobre_voce || "Adicione uma descrição sobre você"
+            emailTexto.innerText = user.email
+
+            if (user.data_nasc) {
+                const dataFormatada = user.data_nasc.split("T")[0]
+                dataTexto.innerText = dataFormatada
+            } else {
+                dataTexto.innerText = "-"
+            }
+
+            telTexto.innerText = user.telefone || "-"
+            cidadeTexto.innerText = user.cidade || "-"
+
+            escTexto.innerText = user.escolaridade || "-"
+            instTexto.innerText = user.instituicao || "-"
+            cursoTexto.innerText = user.curso || "-"
+
+            habilidades = user.habilidades ? JSON.parse(user.habilidades) : []
+            renderHabilidades()
+
+            // FOTO
+            if (user.foto_perfil) {
+                fotoPreview.style.backgroundImage = `url(http://localhost:3000/uploads/${user.foto_perfil})`
+                fotoPreview.innerHTML = ""
+            } else {
+                fotoPreview.innerText = user.nome_completo?.charAt(0).toUpperCase() || "?"
+            }
+
+            // CURRICULO
+            if (user.arquivo_pdf) {
+                nomeArquivoCurriculo = user.arquivo_pdf
+                curriculoTexto.innerText = user.arquivo_pdf
+            } else {
+                nomeArquivoCurriculo = null
+            }
+
+        } catch (erro) {
+            console.log(erro)
+            alert("Erro ao carregar perfil")
+        }
+    }
+
+    function toggleCampo(nome) {
+        const texto = document.getElementById(nome + "Texto")
+        const input = document.getElementById(nome + "Input")
+
+        input.style.display = "inline"
+        texto.style.display = "none"
+
+        let valor = texto.innerText.trim()
+
+        if (valor === "-") valor = ""
+
+        if (nome === "data" && valor) {
+            valor = valor.split("T")[0]
+        }
+
+        input.value = valor
+    }
+
+</script>
+
+</html>

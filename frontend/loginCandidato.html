@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SIEP</title>
+
+    <link rel="stylesheet" href="loginCandidato.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <a href="#" class="back" id="btn_voltar_inicio">
+            ← Voltar para início
+        </a>
+
+        <div class="card">
+
+            <img src="img/logo.png" class="logo-quadrada">
+
+            <h1>Bem-vindo de volta!</h1>
+
+            <p class="subtitle">
+                Entre com sua conta de candidato
+            </p>
+
+            <form id="form_login">
+
+                <label>CPF</label>
+                <div class="input-group">
+                    <input type="text" id="input_cpf">
+                </div>
+
+                <label>Senha</label>
+                <div class="input-group active">
+                    <input type="password" id="input_senha">
+                </div>
+
+                <button type="submit" id="btn_entrar">Entrar</button>
+
+            </form>
+
+            <p id="msg_resultado"></p>
+
+            <p class="register">
+                Não tem uma conta?
+                <a href="#" id="btn_ir_cadastro">Faça seu cadastro</a>
+            </p>
+
+        </div>
+
+    </div>
+    <script>
+        // VOLTAR PARA INICIO
+        document.getElementById("btn_voltar_inicio").onclick = () => {
+            window.location.href = 'index.html';
+        };
+
+        // IR PARA CADASTRO
+        document.getElementById("btn_ir_cadastro").onclick = () => {
+            window.location.href = 'cadastroCandidato.html';
+        };
+
+        // LOGIN
+        document.getElementById("form_login").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const cpf = document.getElementById("input_cpf").value.replace(/\D/g, "");
+            const senha = document.getElementById("input_senha").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/loginUsuario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ cpf, senha })
+                });
+
+                const data = await resposta.json();
+
+                if (data.valido) {
+
+                    // 🔐 SALVA TOKEN
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("id_usuario", data.id_usuario);
+
+                    window.location.href = "perfil.html";
+
+                } else {
+                    document.getElementById("msg_resultado").innerText = "CPF ou senha inválidos";
+                }
+
+            } catch (erro) {
+                console.error(erro);
+                document.getElementById("msg_resultado").innerText = "Erro ao conectar com o servidor";
+            }
+        });
+    </script>
+
+</body>
+
+
+
+</html>

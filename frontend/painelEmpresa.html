@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    
+    <style>
+        body {
+            background-color: #f0fdf9;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 0.75rem !important;
+            padding: 0.75rem !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+    </style>
+
+
+</head>
+<!-- MODAL DE SUCESSO -->
+<div id="modal-sucesso" class="hidden fixed inset-0 bg-black/20 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-10 text-center shadow-lg w-[350px]">
+
+        <div class="bg-green-100 w-16 h-16 mx-auto flex items-center justify-center rounded-full mb-4">
+            <i class="fa-solid fa-check text-green-600 text-2xl"></i>
+        </div>
+
+        <h2 class="text-xl font-bold mb-2">Vaga publicada!</h2>
+        <p class="text-gray-500 mb-6">
+            Sua vaga foi publicada com sucesso e já está visível para candidatos.
+        </p>
+
+        <!-- LOADING -->
+        <div class="w-6 h-6 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+
+    </div>
+</div>
+
+
+
+<body class="text-slate-700">
+
+
+    
+    <div id="dashboard">
+        <header class="bg-white border-b border-gray-100 px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+
+            <h1 class="font-bold text-xl tracking-tight text-slate-800">SIEP</h1>
+
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleScreens()"
+                    class="bg-[#0f8b71] hover:bg-[#0d7a63] text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition">
+                    <i class="fa-solid fa-plus text-xs"></i> Nova Vaga
+                </button>
+                <button id="voltar_inicio" class="text-slate-400 hover:text-slate-600 transition"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-8 py-10">
+            <section class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 flex items-center gap-2">Bem-vindo!</h2>
+                <p class="text-slate-500 mt-1">Gerencie suas vagas e candidatos</p>
+            </section>
+
+
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-2xl border border-gray-50 flex items-center gap-4 shadow-sm">
+                    <div class="bg-green-100 text-green-600 w-12 h-12 flex items-center justify-center rounded-xl"><i
+                            class="fa-solid fa-briefcase"></i></div>
+                    <div>
+                        <p class="text-2xl font-bold">0</p>
+                        <p class="text-sm text-gray-400">Vagas Ativas</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-50 flex items-center gap-4 shadow-sm">
+                    <div class="bg-blue-50 text-blue-500 w-12 h-12 flex items-center justify-center rounded-xl"><i
+                            class="fa-solid fa-users"></i></div>
+                    <div>
+                        <p class="text-2xl font-bold">0</p>
+                        <p class="text-sm text-gray-400">Candidaturas</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-50 flex items-center gap-4 shadow-sm">
+                    <div class="bg-purple-50 text-purple-500 w-12 h-12 flex items-center justify-center rounded-xl"><i
+                            class="fa-solid fa-calendar-days"></i></div>
+                    <div>
+                        <p class="text-2xl font-bold">0</p>
+                        <p class="text-sm text-gray-400">Entrevistas</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-50 flex items-center gap-4 shadow-sm">
+                    <div class="bg-red-50 text-red-400 w-12 h-12 flex items-center justify-center rounded-xl"><i
+                            class="fa-solid fa-bell"></i></div>
+                    <div>
+                        <p class="text-2xl font-bold">0</p>
+                        <p class="text-sm text-gray-400">Notificações</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex gap-3 mb-6">
+
+                <button onclick="trocarAba('vagas')" id="aba-vagas"
+                    class="px-4 py-2 rounded-full bg-[#0f8b71] text-white font-medium">
+                    Minhas Vagas
+                </button>
+
+                <button onclick="trocarAba('candidaturas')" id="aba-candidaturas"
+                    class="px-4 py-2 rounded-full bg-gray-100 text-gray-600 font-medium">
+                    Candidaturas
+                </button>
+
+                <button onclick="trocarAba('notificacoes')" id="aba-notificacoes"
+                    class="px-4 py-2 rounded-full bg-gray-100 text-gray-600 font-medium relative">
+                    Notificações
+                    <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1.5 rounded-full"></span>
+                </button>
+
+            </div>
+
+            <div
+                class="bg-white rounded-[2rem] py-20 border border-gray-50 flex flex-col items-center justify-center text-center">
+                <div class="bg-gray-50 w-20 h-20 flex items-center justify-center rounded-2xl mb-6"><i
+                        class="fa-solid fa-briefcase text-3xl text-gray-300"></i></div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Nenhuma vaga publicada</h3>
+                <p class="text-slate-400 max-w-sm mb-8">Publique sua primeira vaga e comece a receber candidaturas</p>
+                <button onclick="toggleScreens()"
+                    class="bg-[#0f8b71] hover:bg-[#0d7a63] text-white px-8 py-3 rounded-xl flex items-center gap-2 font-semibold transition">
+                    <i class="fa-solid fa-plus"></i> Criar Vaga
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <div id="form-vaga" class="hidden">
+        <div class="max-w-3xl mx-auto px-4 py-8">
+            <button onclick="toggleScreens()"
+                class="text-slate-500 hover:text-slate-800 flex items-center gap-2 mb-6 transition">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para painel
+            </button>
+
+            <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-gray-50">
+                <div class="flex flex-col items-center mb-10 text-center">
+                    
+                    
+                    <!-- logo -->
+                    <div
+                        class="w-16 h-16 flex items-center justify-center rounded-2xl mb-4 text-white text-2xl">
+                        <img src="img/logo.png" class="logo-quadrada">
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    <h2 class="text-2xl font-bold text-slate-800">Publicar Nova Vaga</h2>
+                    <p class="text-slate-400">Preencha os detalhes da vaga</p>
+                </div>
+
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Título da Vaga *</label>
+                        <input id="titulo" type="text" class="w-full outline-none focus:ring-2 focus:ring-emerald-100"
+                            placeholder="Ex: Estágio em Marketing">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Tipo *</label>
+                            <select id="tipo"
+                                class="w-full outline-none appearance-none bg-no-repeat bg-[right_1rem_center]">
+                                <option>Selecione</option>
+                                <option>Estágio</option>
+                                <option>Jovem Aprendiz</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Modalidade *</label>
+                            <select id="modalidade" class="w-full outline-none appearance-none">
+                                <option>Selecione</option>
+                                <option>Híbrido</option>
+                                <option>Remoto</option>
+                                <option>Presencial</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Área</label>
+
+                        <select id="select-area" onchange="toggleOutraArea()"
+                            class="w-full outline-none appearance-none">
+                            <option>Selecione a área</option>
+                            <option>Tecnologia</option>
+                            <option>Saúde</option>
+                            <option>Educação</option>
+                            <option>Varejo</option>
+                            <option>Indústria</option>
+                            <option>Serviços</option>
+                            <option>Financeiro</option>
+                            <option>Logística</option>
+                            <option>Alimentação</option>
+                            <option>Construção</option>
+                            <option>Outros</option>
+                        </select>
+
+                        <!-- Campo escondido -->
+                        <input id="outra-area" type="text" placeholder="Digite a área" class="w-full mt-3 hidden">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Descrição da Vaga *</label>
+                        <textarea id="descricao" class="w-full h-32 outline-none resize-none"
+                            placeholder="Descreva as atividades, responsabilidades e o que você procura..."></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Cidade</label>
+                            <input id="cidade" type="text" class="w-full" placeholder="Cidade">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">UF</label>
+                            <select id="uf" class="w-full outline-none appearance-none">
+                                <option>UF</option>
+                                <option>AC</option>
+                                <option>AL</option>
+                                <option>AP</option>
+                                <option>AM</option>
+                                <option>BA</option>
+                                <option>CE</option>
+                                <option>DF</option>
+                                <option>ES</option>
+                                <option>GO</option>
+                                <option>MA</option>
+                                <option>MT</option>
+                                <option>MS</option>
+                                <option>MG</option>
+                                <option>PA</option>
+                                <option>PB</option>
+                                <option>PR</option>
+                                <option>PE</option>
+                                <option>PI</option>
+                                <option>RJ</option>
+                                <option>RN</option>
+                                <option>RS</option>
+                                <option>RO</option>
+                                <option>RR</option>
+                                <option>SC</option>
+                                <option>SP</option>
+                                <option>SE</option>
+                                <option>TO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Faixa Salarial / Bolsa</label>
+                        <input type="text" class="w-full" placeholder="Ex: R$ 1.200,00 - R$ 1.500,00">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Idade Mínima</label>
+                            <input type="number" class="w-full" value="14">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Idade Máxima</label>
+                            <input type="number" class="w-full" value="24">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="block text-sm font-bold text-slate-700">Requisitos</label>
+
+                        <div class="flex gap-2">
+                            <input id="input-requisito" type="text" class="flex-1" placeholder="Adicionar requisito">
+                            <button type="button" onclick="addTag('requisitos')"
+                                class="bg-[#0f8b71] text-white w-12 h-12 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <div id="lista-requisitos" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="block text-sm font-bold text-slate-700">Benefícios</label>
+
+                        <div class="flex gap-2">
+                            <input id="input-beneficio" type="text" class="flex-1" placeholder="Adicionar benefício">
+                            <button type="button" onclick="addTag('beneficios')"
+                                class="bg-[#0f8b71] text-white w-12 h-12 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <div id="lista-beneficios" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <button type="button" onclick="publicarVaga()"
+                        class="w-full bg-[#0f8b71] hover:bg-[#0d7a63] text-white py-4 rounded-xl font-bold text-lg mt-8 transition">
+                        Publicar Vaga
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const token = localStorage.getItem("token")
+        const idEmpresa = localStorage.getItem("id_empresa")
+
+        if (!token || !idEmpresa) {
+            window.location.href = "loginEmpresa.html"
+        }
+
+
+        function toggleScreens() {
+            const dashboard = document.getElementById('dashboard');
+            const form = document.getElementById('form-vaga');
+            dashboard.classList.toggle('hidden');
+            form.classList.toggle('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function addTag(tipo) {
+            let input = document.getElementById(`input-${tipo.slice(0, -1)}`);
+            let lista = document.getElementById(`lista-${tipo}`);
+
+            if (input.value.trim() === "") return;
+
+            let tag = document.createElement("div");
+            tag.className = "bg-green-100 text-green-700 px-3 py-1 rounded-full flex items-center gap-2";
+
+            tag.innerHTML = `
+        ${input.value}
+        <button onclick="this.parentElement.remove()" class="font-bold">×</button>
+    `;
+
+            lista.appendChild(tag);
+            input.value = "";
+        }
+
+        function toggleOutraArea() {
+            const select = document.getElementById("select-area");
+            const input = document.getElementById("outra-area");
+
+            if (select.value === "Outros") {
+                input.classList.remove("hidden");
+            } else {
+                input.classList.add("hidden");
+                input.value = "";
+            }
+        }
+
+        function trocarAba(aba) {
+            console.log("aba:", aba);
+        }
+
+        async function publicarVaga() {
+
+            const requisitos = [...document.querySelectorAll("#lista-requisitos div")]
+                .map(el => el.textContent.replace("×", "").trim());
+
+            const areaSelecionada = document.getElementById("select-area").value;
+
+            const dados = {
+                id_empresa: localStorage.getItem("id_empresa"),
+
+                titulo_vaga: document.getElementById("titulo").value.trim(),
+                tipo: document.getElementById("tipo").value,
+                modalidade: document.getElementById("modalidade").value,
+
+                area: areaSelecionada === "Outros"
+                    ? document.getElementById("outra-area").value
+                    : areaSelecionada,
+
+                descricao: document.getElementById("descricao").value.trim(),
+                cidade: document.getElementById("cidade").value.trim(),
+                uf: document.getElementById("uf").value,
+
+                salario: document.querySelector('input[placeholder*="R$"]').value,
+
+                idade_minima: document.querySelectorAll('input[type="number"]')[0].value,
+                idade_maxima: document.querySelectorAll('input[type="number"]')[1].value,
+
+                requisitos: requisitos
+            };
+
+            console.log("ENVIANDO:", dados); // DEBUG
+
+            try {
+                const resposta = await fetch("http://localhost:3000/vagasCriar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dados)
+                });
+
+                const resultado = await resposta.json();
+                console.log("RESPOSTA:", resultado);
+
+                // 👇 mostra erro do backend
+                if (resultado.resposta && resultado.resposta !== "Vaga publicada com sucesso!") {
+                    alert(resultado.resposta);
+                    return;
+                }
+
+                document.getElementById("modal-sucesso").classList.remove("hidden");
+
+                setTimeout(() => {
+                    document.getElementById("modal-sucesso").classList.add("hidden");
+                    toggleScreens();
+                    carregarVagas();
+                }, 1500);
+
+            } catch (erro) {
+                console.error("ERRO:", erro);
+                alert("Erro ao conectar com o servidor.");
+            }
+        }
+
+
+
+
+
+        async function carregarVagas() {
+
+            const lista = document.getElementById("lista-vagas")
+            const vazio = document.getElementById("estado-vazio")
+
+            try {
+                const resposta = await fetch("http://localhost:3000/vagas")
+                const vagas = await resposta.json()
+
+                if (vagas.length === 0) {
+                    vazio.classList.remove("hidden")
+                    lista.classList.add("hidden")
+                    return
+                }
+
+                vazio.classList.add("hidden")
+                lista.classList.remove("hidden")
+
+                lista.innerHTML = ""
+
+                vagas.forEach(vaga => {
+                    lista.innerHTML += `
+            <div class="bg-white p-6 rounded-2xl border mb-4 text-left shadow-sm">
+
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold">${vaga.titulo_vaga}</h3>
+                    <span class="text-sm text-green-600 font-semibold">Ativa</span>
+                </div>
+
+                <div class="flex gap-2 mt-2 text-sm flex-wrap">
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">${vaga.tipo}</span>
+                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded-full">${vaga.modalidade}</span>
+                    <span class="bg-gray-100 px-2 py-1 rounded-full">${vaga.area}</span>
+                </div>
+
+                <p class="mt-3 text-gray-600">${vaga.descricao}</p>
+
+                <p class="text-sm text-gray-400 mt-2">
+                    📍 ${vaga.cidade} - ${vaga.uf}
+                </p>
+
+            </div>
+        `
+                })
+
+            } catch (erro) {
+                lista.innerHTML = "Erro ao carregar vagas"
+            }
+        }
+
+        // Botao ir para o inicio (sair)
+        document.getElementById("voltar_inicio").onclick = () => {
+            localStorage.removeItem("token")
+            localStorage.removeItem("id_usuario")
+            localStorage.removeItem("id_empresa")
+
+            window.location.href = "index.html"
+        }
+
+    </script>
+</body>
+
+</html>

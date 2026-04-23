@@ -1,0 +1,318 @@
+:root {
+    --azul-primario: #2563eb;
+    --fundo-claro: #f8fafc;
+    --branco-lateral: #ffffff;
+    --cor-borda: #e2e8f0;
+    --texto-principal: #1e293b;
+    --texto-suave: #64748b;
+    }
+    
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--fundo-claro);
+    color: var(--texto-principal);
+    }
+    
+    /* Menu Lateral */
+    .div_menu_lateral {
+    width: 260px;
+    background: var(--branco-lateral);
+    height: 100vh;
+    border-right: 1px solid var(--cor-borda);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    }
+    
+    .div_logotipo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--azul-primario);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    }
+    
+    .btn_item_navegacao {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    color: var(--texto-suave);
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    }
+    
+    .btn_item_navegacao.ativo {
+    background: #eff6ff;
+    color: var(--azul-primario);
+    }
+    
+    .btn_item_navegacao:hover:not(.ativo) {
+    background: #f1f5f9;
+    }
+    
+    .btn_item_navegacao i {
+    margin-right: 12px;
+    }
+    
+    .div_espacador_sair {
+    margin-top: auto;
+    }
+    
+    /* Conteúdo Principal */
+    .div_conteudo_principal {
+    margin-left: 260px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
+    }
+    
+    .div_cabecalho_perfil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    }
+    
+    .txt_titulo_pagina {
+    margin: 0;
+    }
+    
+    .txt_subtitulo_pagina {
+    color: var(--texto-suave);
+    margin: 5px 0 0 0;
+    }
+    
+    .btn_editar_perfil {
+    background: var(--azul-primario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+    
+    /* Cartões e Grade */
+    .div_cartao {
+    background: white;
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: 0.2s;
+    }
+    
+    .div_cartao:hover {
+    transform: translateY(-2px);
+    }
+    
+    .div_perfil_topo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    }
+    
+    .div_foto_substituta {
+    width: 80px;
+    height: 80px;
+    background: var(--azul-primario);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    }
+    
+    .txt_nome_usuario {
+    margin: 0;
+    }
+    
+    .txt_email_usuario {
+    color: var(--texto-suave);
+    display: block;
+    margin-top: 5px;
+    }
+    
+    .div_grade_informacoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    }
+    
+    .div_titulo_secao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--texto-principal);
+    }
+    
+    .div_linha_informacao {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--texto-suave);
+    }
+    
+    /* ================= INPUT BONITO (SEM QUEBRAR LAYOUT) ================= */
+    input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    color: inherit;
+    width: auto;
+    padding: 0;
+    }
+    
+    /* quando estiver editando */
+    .editando input {
+    background: #f8fafc;
+    border: 1px solid var(--cor-borda);
+    padding: 6px 8px;
+    border-radius: 6px;
+    width: auto;
+    min-width: 120px;
+    }
+    
+    /* inputs maiores */
+    #nomeInput,
+    #sobreInput {
+    width: 100%;
+    }
+    
+    /* alinhamento bonito */
+    .div_linha_informacao input {
+    text-align: right;
+    }
+    
+    /* foco */
+    .editando input:focus {
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    
+    /* ================= BOTÕES ================= */
+    #btnSalvar {
+    background: var(--azul-primario);
+    color: white;
+    }
+    
+    #btnCancelar {
+    background: #e5e7eb;
+    color: #111;
+    }
+    
+    #btnSalvar:hover {
+    background: #1d4ed8;
+    }
+    
+    #btnCancelar:hover {
+    background: #d1d5db;
+    }
+    
+    /* ================= FOTO ================= */
+    #fotoPreview {
+    transition: 0.3s;
+    }
+    
+    #fotoPreview:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    }
+    
+    /* ================= HABILIDADES ================= */
+    #listaHabilidades span {
+    background: #e2e8f0;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+    }
+    
+    #listaHabilidades span:hover {
+    background: #cbd5f5;
+    }
+    
+    /* ================= HEADER BOTÕES ================= */
+    .div_cabecalho_perfil div:last-child {
+    display: flex;
+    gap: 10px;
+    }
+    
+    /* ================= UPLOAD ================= */
+    .div_caixa_envio {
+    border: 2px dashed var(--cor-borda);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    color: var(--texto-suave);
+    cursor: pointer;
+    transition: 0.3s;
+    }
+    
+    .div_caixa_envio:hover {
+    border-color: var(--azul-primario);
+    background: #f8faff;
+    }
+    
+    .icone_envio {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+    }
+    
+    .txt_ajuda_envio {
+    margin: 5px 0;
+    font-weight: bold;
+    }
+    
+    /* ================= RESPONSIVO ================= */
+    @media (max-width: 768px) {
+    .div_grade_informacoes {
+    grid-template-columns: 1fr;
+    }
+    
+    .div_menu_lateral {
+        display: none;
+    }
+    
+    .div_conteudo_principal {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    }
+
+    .editando .editavel {
+        background: #f8fafc;
+        border-radius: 6px;
+        padding: 4px 6px;
+        outline: none;
+        cursor: text;
+    }
+
+    .logo-quadrada {
+        width: 50px;
+        height: 50px;
+        object-fit: cover; /* mantém proporção */
+        border-radius: 10px; /* deixa levemente arredondado */
+    }
+    

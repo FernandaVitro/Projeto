@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SIEP</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+
+<body>
+
+    <!-- ================= Cabeçario ================= -->
+    <header class="cabecario">
+        <div class="logo">
+            <img src="img/logo.png" class="logo-quadrada">
+        </div>
+
+        <nav class="navegação">
+            <a href="#" id="entrar_login">Entrar</a>
+            <button class="btn-empresa" id="empresa">Sou Empresa</button>
+        </nav>
+    </header>
+
+    <!-- ================= Principal ================= -->
+    <section class="div_principal">
+        <span class="frase">✨ Sua carreira começa aqui</span>
+
+        <h1>
+            Acompanhe seus <span>processos seletivos</span><br>
+            em um só lugar
+        </h1>
+
+        <p>
+            Encontre vagas de estágio e jovem aprendiz, organize suas candidaturas
+            e receba notificações sobre cada etapa do processo.
+        </p>
+
+        <div class="div_principal-btn">
+            <button class="btn-primario" id="criar_conta">Criar conta grátis →</button>
+            <button class="btn-começar">Começar agora</button>
+        </div>
+    </section>
+
+    <!-- ================= Meio ================= -->
+    <section class="div_meio">
+        <h2>Tudo que você precisa para conseguir seu emprego</h2>
+        <p class="subtitulo">
+            Organize suas candidaturas, acompanhe entrevistas e nunca mais perca uma oportunidade
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon azul">🎯</div>
+                <h3>Vagas Selecionadas</h3>
+                <p>Encontre vagas de estágio e jovem aprendiz perfeitas para seu perfil</p>
+            </div>
+
+            <div class="card">
+                <div class="icon verde">⏰</div>
+                <h3>Acompanhamento em Tempo Real</h3>
+                <p>Veja o status de cada candidatura</p>
+            </div>
+
+            <div class="card">
+                <div class="icon roxo">🔔</div>
+                <h3>Notificações Automáticas</h3>
+                <p>Receba alertas sobre novas vagas e entrevistas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Parte azul ================= -->
+    <section class="areaBTN">
+        <h2>Pronto para começar?</h2>
+        <p>Escolha como deseja acessar a plataforma</p>
+
+        <div class="area-btn">
+            <button class="btn-começar">Ver Vagas</button>
+            <button class="btn_navegação" id="painel">Acesso Painel</button>
+            <button class="btn-começar" id="criar_conta2">Criar Conta Grátis</button>
+            <button class="btn_navegação" id="empresa2">Sou Empresa</button>
+        </div>
+    </section>
+
+    <!-- ================= Rodapé ================= -->
+    <footer class="roda_pé">
+        <strong>(logo) SIEP</strong>
+        <p>Conectando talentos às melhores oportunidades</p>
+    </footer>
+
+</body>
+
+<script>
+    // Cadastro candidato
+    document.getElementById("criar_conta").onclick = () => {
+        window.location.href = 'cadastroCandidato.html';
+    };
+
+    document.getElementById("criar_conta2").onclick = () => {
+        window.location.href = 'cadastroCandidato.html';
+    };
+
+    // Login candidato
+    document.getElementById("entrar_login").onclick = () => {
+        window.location.href = 'loginCandidato.html';
+    };
+
+    // Cadastro empresa
+    document.getElementById("empresa").onclick = () => {
+        window.location.href = 'cadastroEmpresa.html';
+    };
+
+    document.getElementById("empresa2").onclick = () => {
+        window.location.href = 'cadastroEmpresa.html';
+    };
+
+    // 🔥 ACESSO AO PAINEL (COM PROTEÇÃO)
+    document.getElementById("painel").onclick = () => {
+
+        const idEmpresa = localStorage.getItem("id_empresa")
+
+        if (!idEmpresa) {
+            // NÃO LOGADO → LOGIN
+            window.location.href = "loginEmpresa.html"
+        } else {
+            // LOGADO → PAINEL
+            window.location.href = "painelEmpresa.html"
+        }
+    };
+</script>
+
+</html>

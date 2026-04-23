@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* FUNDO DA TELA */
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f6f9ff, #eef3ff);
+    display: flex;
+    justify-content: center;
+}
+
+/* CONTROLE REAL DA POSIÇÃO (NÃO CENTRALIZA) */
+.page {
+    width: 380px;
+    margin-top: 150px; /* posição real do layout da imagem */
+}
+
+.logo-quadrada {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* mantém proporção */
+    border-radius: 10px; /* deixa levemente arredondado */
+}
+
+/* VOLTAR PARA INÍCIO */
+.back {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    padding: 40px 32px;
+    border-radius: 22px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* ÍCONE */
+.icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: #3b5bdb;
+    color: #fff;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+/* TEXTO */
+h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+/* FORM */
+label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    margin: 14px 0 6px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #dbe3ff;
+}
+
+/* CAMPO ATIVO (SENHA NA IMAGEM) */
+.input-group.active {
+    border: 2px solid #3b5bdb;
+}
+
+.input-icon {
+    opacity: 0.6;
+}
+
+input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+/* BOTÃO */
+button {
+    margin-top: 24px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #3b5bdb, #4c6ef5);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* CADASTRO */
+.register {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.register a {
+    color: #3b5bdb;
+    font-weight: 600;
+    text-decoration: none;
+}

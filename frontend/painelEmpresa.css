@@ -1,0 +1,52 @@
+body {
+    background-color: #f0fdf9;
+    font-family: 'Inter', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+input, select, textarea {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem !important;
+    width: 100%;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+/* botão + */
+.btn-add {
+    background-color: #0f8b71;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+.logo-quadrada {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* mantém proporção */
+    border-radius: 10px; /* deixa levemente arredondado */
+}
+
+
+/* tags estilo da imagem */
+.tag {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 5px 12px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag span {
+    cursor: pointer;
+    font-weight: bold;
+}
