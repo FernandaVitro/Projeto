@@ -1,134 +1,234 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Siep-swagger",
-      "version": "1.0.0",
-      "description": "Documentação swagger"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SIEP API",
+    "version": "1.0.0",
+    "description": "Documentação completa da API SIEP"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
-    ],
-    "paths": {
-      "/cadastroUsuario": {
-        "post": {
-          "summary": "Cadastro de usuário",
-          "tags": ["Usuário"],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "nome_completo": { "type": "string" },
-                    "data_nasc": { "type": "string" },
-                    "cpf": { "type": "string" },
-                    "rg": { "type": "string" },
-                    "email": { "type": "string" },
-                    "telefone": { "type": "string" },
-                    "endereco": { "type": "string" },
-                    "cidade": { "type": "string" },
-                    "uf": { "type": "string" },
-                    "senha": { "type": "string" }
+    }
+  },
+  "paths": {
+
+    "/cadastroUsuario": {
+      "post": {
+        "summary": "Cadastro de usuário",
+        "tags": ["Usuário"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nome_completo", "cpf", "email", "senha"],
+                "properties": {
+                  "nome_completo": { "type": "string" },
+                  "data_nasc": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "rg": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "endereco": { "type": "string" },
+                  "cidade": { "type": "string" },
+                  "uf": { "type": "string" },
+                  "senha": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Cadastro efetuado" }
+        }
+      }
+    },
+
+    "/loginUsuario": {
+      "post": {
+        "summary": "Login de usuário",
+        "tags": ["Usuário"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "senha": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Retorna token JWT" }
+        }
+      }
+    },
+
+    "/cadastroEmpresa": {
+      "post": {
+        "summary": "Cadastro de empresa",
+        "tags": ["Empresa"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nome_empresa", "cnpj", "email", "senha"],
+                "properties": {
+                  "nome_empresa": { "type": "string" },
+                  "cnpj": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "setor_atuacao": { "type": "string" },
+                  "endereco": { "type": "string" },
+                  "cidade": { "type": "string" },
+                  "uf": { "type": "string" },
+                  "descricao": { "type": "string" },
+                  "senha": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Cadastro efetuado" }
+        }
+      }
+    },
+
+    "/loginEmpresa": {
+      "post": {
+        "summary": "Login de empresa",
+        "tags": ["Empresa"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "senha": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Retorna token JWT" }
+        }
+      }
+    },
+
+    "/vagasCriar": {
+      "post": {
+        "summary": "Criar vaga (empresa)",
+        "tags": ["Vagas"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "titulo_vaga": { "type": "string" },
+                  "tipo": { "type": "string" },
+                  "modalidade": { "type": "string" },
+                  "area": { "type": "string" },
+                  "descricao": { "type": "string" },
+                  "cidade": { "type": "string" },
+                  "uf": { "type": "string" },
+                  "salario": { "type": "string" },
+                  "idade_minima": { "type": "integer" },
+                  "idade_maxima": { "type": "integer" },
+                  "requisitos": {
+                    "type": "array",
+                    "items": { "type": "string" }
                   }
                 }
               }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cadastro"
-            }
           }
+        },
+        "responses": {
+          "200": { "description": "Vaga criada" },
+          "403": { "description": "Apenas empresas" }
+        }
+      }
+    },
+
+    "/perfil/{id}": {
+      "get": {
+        "summary": "Buscar perfil",
+        "tags": ["Perfil"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Dados do perfil" }
         }
       },
-  
-      "/loginUsuario": {
-        "post": {
-          "summary": "Login de usuário",
-          "tags": ["Usuário"],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "cpf": { "type": "string" },
-                    "senha": { "type": "string" }
+
+      "put": {
+        "summary": "Editar perfil (com upload)",
+        "tags": ["Perfil"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome_completo": { "type": "string" },
+                  "data_nasc": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "cidade": { "type": "string" },
+                  "sobre_voce": { "type": "string" },
+                  "escolaridade": { "type": "string" },
+                  "instituicao": { "type": "string" },
+                  "curso": { "type": "string" },
+                  "habilidades": { "type": "string" },
+                  "foto": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "curriculo": {
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "valido ou invalido"
-            }
           }
-        }
-      },
-  
-      "/cadastroEmpresa": {
-        "post": {
-          "summary": "Cadastro de empresa",
-          "tags": ["Empresa"],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "nome_empresa": { "type": "string" },
-                    "cnpj": { "type": "string" },
-                    "email": { "type": "string" },
-                    "telefone": { "type": "string" },
-                    "setor_atuacao": { "type": "string" },
-                    "endereco": { "type": "string" },
-                    "cidade": { "type": "string" },
-                    "uf": { "type": "string" },
-                    "descricao": { "type": "string" },
-                    "senha": { "type": "string" }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cadastro"
-            }
-          }
-        }
-      },
-  
-      "/loginEmpresa": {
-        "post": {
-          "summary": "Login de empresa",
-          "tags": ["Empresa"],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "email": { "type": "string" },
-                    "senha": { "type": "string" }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "valido ou invalido"
-            }
-          }
+        },
+        "responses": {
+          "200": { "description": "Perfil atualizado" }
         }
       }
     }
+
   }
+}
